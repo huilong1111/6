@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <title>  个人信息主页 </title>
+    <style>
+        .circle1 {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            margin: 20px auto;
+            border:1px solid#000000;
+        }
+        .circle1 img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        body{
+    margin:10px;
+    text-align:center;
+    background-image:url('1.png') ;
+    background-size:cover;
+}
+#zong{
+    height: 500px;
+    border:0px solid#000000;
+    padding:20px 500px;
+}
+#ger{
+    width: 100%;
+    height:260px;
+    margin-bottom:-2px;
+    border:0px solid#000000;
+    text-align:center;
+    background: linear-gradient(135deg, #30c45f, #62c2d1);
+    border-radius:20px;
+    box-shadow: 2px 2px 5px #000000;
+}
+#xx{
+    width: 100%;
+    height:230px;
+    border: 0px solid#000000;
+    text-align: center;
+    background: linear-gradient(135deg, #5ac430, #dbbc3d);
+    border-radius:20px;
+    box-shadow: 2px 2px 5px #000000;
+}
+input[type=text] {
+    width: 20%;
+    padding: 5px 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+input[type=button] {
+    padding: 5px 10px;
+    background: linear-gradient(135deg, #e1be3c, #dbbc3d);
+    color: white;
+}
+textarea{
+    width: 80%;
+    padding: 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+
+    </style>
+    <link href="ger.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="zong">
+    <div id="ger" >
+        <div class="circle1">
+               <img id="aimg" src="0.png" alt="头像" onclick="handup(this)">
+        </div>
+        <p>
+        点击头像更换
+        </p>
+    </div>
+    <div id="xx">
+
+        <p>
+            名字:<input type="text" id="名字" onblur="save()">
+        </p>
+
+        <p>
+            简介:
+        </p>
+        <p>
+            <textarea  id="简介" onblur="save()"></textarea >
+        </p>
+        <p>
+            <input type="button" name="b1" value="保存" onclick="alert('保存成功')">
+        </p>
+    </div>
+
+</div>
+<script>
+    window.onload = function() {
+        load();
+    };
+    function save() {
+        var content1 = document.getElementById("名字").value;
+        localStorage.setItem("save1", content1);
+        var content2 = document.getElementById("简介").value;
+        localStorage.setItem("save2", content2);
+    }
+    function load() {
+        var save1= localStorage.getItem("save1");
+        var save2= localStorage.getItem("save2");
+        if (save1) {
+            document.getElementById("名字").value = save1;
+        }
+        if (save1) {
+            document.getElementById("简介").value = save2;
+        }
+    }
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display = 'none';
+    let Image;
+    fileInput.addEventListener('change',function (e){
+        const file = e.target.files[0];
+        if(file){
+            const newUrl = URL.createObjectURL(file);
+            Image.src = newUrl;
+        }
+    });
+    function handup(i){
+        Image = i;
+        fileInput.click();
+    }
+
+</script>
+</body>
+</html>
